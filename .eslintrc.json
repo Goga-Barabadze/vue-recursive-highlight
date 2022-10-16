@@ -1,0 +1,36 @@
+{
+	"root": true,
+	"parser": "vue-eslint-parser",
+	"extends": [
+		"plugin:vue/vue3-essential",
+		"eslint:recommended",
+		"@vue/typescript/recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2020
+	},
+	"rules": {
+		"semi": ["error", "never"],
+		"quotes": ["error", "double"],
+		"indent": ["error", 2],
+		"object-curly-spacing": ["error", "always"],
+		"max-lines-per-function": [
+			"error",
+			{
+				"max": 30,
+				"skipBlankLines": true,
+				"skipComments": true
+			}
+		],
+		"max-lines": [
+			"error",
+			{
+				"max": 150,
+				"skipBlankLines": true,
+				"skipComments": true
+			}
+		],
+		"complexity": ["error", { "max": 10 }],
+		"no-await-in-loop": "error"
+	}
+}

@@ -1,0 +1,35 @@
+{
+	"name": "vue-recursive-highlight",
+	"private": true,
+	"version": "0.0.0",
+	"author": "Goga Barabadze",
+	"license": "MIT",
+	"bugs": "https://github.com/Goga-Barabadze/vue-recursive-highlight/issues",
+	"homepage": "https://github.com/Goga-Barabadze/vue-recursive-highlight",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc --noEmit && vite build",
+		"preview": "vite preview",
+		"test": "vitest",
+		"coverage": "vitest run --coverage",
+		"lint": "eslint . --ext .ts,.js,.vue",
+		"lint:fix": "eslint . --ext .ts,.js,.vue --fix"
+	},
+	"dependencies": {
+		"@vueuse/core": "^9.3.1",
+		"vue": "^3.2.25"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.4.0",
+		"@typescript-eslint/parser": "^5.4.0",
+		"@vitejs/plugin-vue": "^2.3.4",
+		"@vitest/coverage-c8": "^0.24.3",
+		"@vitest/ui": "^0.24.3",
+		"@vue/eslint-config-typescript": "^9.1.0",
+		"eslint": "^8.26.0",
+		"typescript": "^4.5.4",
+		"vite": "^2.9.15",
+		"vitest": "^0.24.3",
+		"vue-tsc": "^0.34.7"
+	}
+}
