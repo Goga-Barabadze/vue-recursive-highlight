@@ -2,61 +2,36 @@
 
 import { Directive, DirectiveBinding } from "vue"
 import { Config, ConfigItem } from "./model/Config"
-import FragmentUtils from "./utils/fragments"
-import { Fragment } from "./model/Fragment"
-import { setAttributesOnElement } from "./utils/element"
-import { useFps } from "@vueuse/core"
+import { updateDOM } from "./utils/traverse"
 
 const vHighlight: Directive = {
   mounted: (element: HTMLElement, binding: DirectiveBinding<Config>) => {
-    element.childNodes.forEach((value) => {
-      if (!value.nodeValue) {
-        return
-      }
-
-      const wrap = document.createElement("span")
-      FragmentUtils.turnIntoFragments(value.nodeValue, binding.value).forEach((fragment: Fragment) => {
-        const spanNode = document.createElement("span")
-        spanNode.innerText = fragment.string
-        setAttributesOnElement(spanNode, fragment.config)
-
-        wrap.appendChild(spanNode)
-      })
-
-      value.replaceWith(wrap)
-    })
-  }
+    updateDOM(element, binding.value)
+  },
 }
 
-
-
 const config = [
-  new ConfigItem({ regex: 	/\w+/ }, { class: "red" }),
-  new ConfigItem({ string: 	"love" }),
+  new ConfigItem({ regex: /\w+/ }, { tag: "span", style: "color: red" }),
 ]
-
-const fps = useFps()
 
 </script>
 
 <template>
-
-  {{ fps }}
-
   <div v-highlight="config">
-    hello
+    <code>hi</code>
   </div>
 </template>
 
-<style scoped>
+<style>
 * :deep(.red) {
-  color: red;
-}
-* :deep(.blue) {
-  color: blue;
+  background: #8ac926;
+  color: white;
+  padding: 5px 5px 5px 5px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-* :deep(.green) {
-  color: green;
+* :deep(.red):hover {
+  background: rgba(138, 201, 38, 0.8);
 }
 </style>
