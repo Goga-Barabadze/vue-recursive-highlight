@@ -1,3 +1,5 @@
+import { HTMLTag } from "./Types"
+
 export type Config = ConfigItem []
 
 export class ConfigItem {
@@ -24,7 +26,7 @@ export class Modifier {
   class?: string
   style?: string
   component?: Record<string, unknown>
-  tag?: string
+  tag?: HTMLTag
 }
 
 export class Selector {
