@@ -35,7 +35,7 @@ function traverseAndCollectNodes (element: HTMLElement, config: Config) {
 function createContainer (element: HTMLElement, vNode: VNode) {
   const div = document.createElement("span")
 
-  const id = "container-" + randomHex()
+  const id = "v-highlight-container-" + randomHex()
   div.id = id
   element.replaceWith(div)
 
