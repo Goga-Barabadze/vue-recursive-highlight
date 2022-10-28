@@ -25,6 +25,7 @@ export class Modifier {
      */
   class?: string
   style?: string
+  // props?: (RawProps & P) TODO: Allow all props to be passed
   component?: Record<string, unknown>
   tag?: HTMLTag
 }
