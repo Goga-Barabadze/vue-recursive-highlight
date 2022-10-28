@@ -67,11 +67,11 @@ describe("turnIntoFragments", () => {
       new ConfigItem({ range: 	[21, 24] }),
     ]
     expect(FragmentsUtils.turnIntoFragments("love is wise, hatred is foolish", config)).toStrictEqual([
-      new Fragment(config.at(0) as ConfigItem, 	"love",			0, 	4),
+      new Fragment(config[0] as ConfigItem, 	"love",			0, 	4),
       new Fragment(new ConfigItem(), 									" is ",			4, 	8),
-      new Fragment(config.at(1) as ConfigItem, 	"wise",			8, 	12),
+      new Fragment(config[1] as ConfigItem, 	"wise",			8, 	12),
       new Fragment(new ConfigItem(), 									", hatred ",12, 21),
-      new Fragment(config.at(2) as ConfigItem, 	"is ",			21, 24),
+      new Fragment(config[2] as ConfigItem, 	"is ",			21, 24),
       new Fragment(new ConfigItem(), 									"foolish",	24, 31),
     ])
   })
@@ -83,11 +83,11 @@ describe("turnIntoFragments", () => {
       new ConfigItem({ string: 	"love" }),
     ]
     expect(FragmentsUtils.turnIntoFragments("love is wise, hatred is foolish", config)).toStrictEqual([
-      new Fragment(config.at(2) as ConfigItem, 	"love",			0, 	4),
+      new Fragment(config[2] as ConfigItem, 	"love",			0, 	4),
       new Fragment(new ConfigItem(), 									" is ",			4, 	8),
-      new Fragment(config.at(1) as ConfigItem, 	"wise",			8, 	12),
+      new Fragment(config[1] as ConfigItem, 	"wise",			8, 	12),
       new Fragment(new ConfigItem(), 									", hatred ",12, 21),
-      new Fragment(config.at(0) as ConfigItem, 	"is ",			21, 24),
+      new Fragment(config[0] as ConfigItem, 	"is ",			21, 24),
       new Fragment(new ConfigItem(), 									"foolish",	24, 31),
     ])
   })
