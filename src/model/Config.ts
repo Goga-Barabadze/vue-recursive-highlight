@@ -37,9 +37,7 @@ export class Modifier {
      *
      * Example: `* :deep(.btn-primary) { color: blue }`
      */
-  class?: string
-  style?: string
-  // props?: (RawProps & P) TODO: Allow all props to be passed
+  props?: Record<string, unknown>
   component?: Record<string, unknown>
   tag?: HTMLTag
 }

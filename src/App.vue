@@ -11,14 +11,16 @@ const vHighlight: Directive = {
 }
 
 const config = [
-  new ConfigItem({ regex: /\w+/ }, { tag: "span", style: "color: red" }),
+  new ConfigItem({ regex: /\w+/ }, { tag: "span", props: { style: "color: red" } }),
 ]
 
 </script>
 
 <template>
   <div v-highlight="config">
-    <code>hi</code>
+    <code>
+      <div></div>
+    </code>
   </div>
 </template>
 

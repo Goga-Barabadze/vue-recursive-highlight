@@ -2,7 +2,7 @@ import FragmentUtils from "./fragments"
 import { Fragment } from "../model/Fragment"
 import { Config } from "../model/Config"
 import { createApp, h, VNode } from "vue"
-import { firstNonNull } from "./utils"
+import { firstNonNull, mergeObjects } from "./utils"
 import { randomHex } from "./random"
 
 export default function updateDOM(element: HTMLElement, config: Config) {
@@ -14,22 +14,19 @@ function traverseAndCollectNodes (element: HTMLElement, config: Config) {
   const children: VNode [] = []
   element.childNodes.forEach((child: ChildNode) => {
     if (child.nodeName !== "#text") {
-      const parentTag = firstNonNull(child.nodeName, "span") as string
-
-      children.push(h(parentTag, traverseAndCollectNodes(child as HTMLElement, config)))
+      children.push(traverseAndCollectNodes(child as HTMLElement, config))
     } else {
       const fragments = FragmentUtils.turnIntoFragments(child.nodeValue as string, config)
       fragments.forEach((fragment: Fragment) => {
         const modifier = fragment.config.at(0)?.modifier
         const tag = firstNonNull(modifier?.component, modifier?.tag, "span") as string | Record<string, unknown>
-        const styles = fragment.config.map(value => value.modifier?.style)
-
-        children.push(h(tag, { style: styles }, fragment.string))
+        children.push(h(tag, mergeObjects(), fragment.string))
       })
     }
   })
 
-  return h("span", children)
+  const parentTag = firstNonNull(element.nodeName, "span") as string
+  return h(parentTag, children)
 }
 
 function createContainer (element: HTMLElement, vNode: VNode) {
