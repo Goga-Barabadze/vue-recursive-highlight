@@ -3,7 +3,7 @@ import { Fragment } from "../model/Fragment"
 import { Config } from "../model/Config"
 import { createApp, h, VNode } from "vue"
 import { firstNonNull } from "./utils"
-import { randomHex } from "./random";
+import { randomHex } from "./random"
 
 export default function updateDOM(element: HTMLElement, config: Config) {
   const tree = traverseAndCollectNodes(element, config)
