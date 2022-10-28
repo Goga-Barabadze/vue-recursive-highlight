@@ -2,7 +2,7 @@
 
 import { Directive, DirectiveBinding } from "vue"
 import { Config, ConfigItem } from "./model/Config"
-import { updateDOM } from "./utils/traverse"
+import updateDOM from "./utils/traverse"
 
 const vHighlight: Directive = {
   mounted: (element: HTMLElement, binding: DirectiveBinding<Config>) => {

@@ -5,6 +5,11 @@ import { createApp, h, VNode } from "vue"
 import { firstNonNull } from "./utils"
 import { randomHex } from "./random";
 
+export default function updateDOM(element: HTMLElement, config: Config) {
+  const tree = traverseAndCollectNodes(element, config)
+  createContainer(element, tree!)
+}
+
 function traverseAndCollectNodes (element: HTMLElement, config: Config) {
   const children: VNode [] = []
   element.childNodes.forEach((child: ChildNode) => {
@@ -25,11 +30,6 @@ function traverseAndCollectNodes (element: HTMLElement, config: Config) {
   })
 
   return h("span", children)
-}
-
-export function updateDOM(element: HTMLElement, config: Config) {
-  const tree = traverseAndCollectNodes(element, config)
-  createContainer(element, tree!)
 }
 
 function createContainer (element: HTMLElement, vNode: VNode) {
