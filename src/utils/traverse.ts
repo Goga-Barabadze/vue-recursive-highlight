@@ -3,6 +3,7 @@ import { Fragment } from "../model/Fragment"
 import { Config } from "../model/Config"
 import { createApp, h, VNode } from "vue"
 import { firstNonNull } from "./utils"
+import { randomHex } from "./random";
 
 function traverseAndCollectNodes (element: HTMLElement, config: Config) {
   const children: VNode [] = []
@@ -34,7 +35,7 @@ export function updateDOM(element: HTMLElement, config: Config) {
 function createContainer (element: HTMLElement, vNode: VNode) {
   const div = document.createElement("span")
 
-  const id = "container-" + Math.floor(Math.random() * 10000000)
+  const id = "container-" + randomHex()
   div.id = id
   element.replaceWith(div)
 
