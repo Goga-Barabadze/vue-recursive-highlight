@@ -5,10 +5,10 @@ import { ConfigItem } from "../../src/model/Config"
 
 describe("turnIntoFragments", () => {
   it.each([
-    ["love is wise, hatred is foolish", 			 	31],
-    ["Liebe ist weise, Hass ist töricht", 		 	33],
-    ["სიყვარული ბრძენია, სიძულვილი სისულელეა",  38],
-    ["爱是明智的，仇恨是愚蠢的", 										12],
+    ["love is wise, hatred is foolish", 31],
+    ["Liebe ist weise, Hass ist töricht", 33],
+    ["სიყვარული ბრძენია, სიძულვილი სისულელეა", 38],
+    ["爱是明智的，仇恨是愚蠢的", 12],
   ])("return single fragment when selectors do not match", (string, end) => {
     expect(FragmentsUtils.turnIntoFragments(string, [])).toStrictEqual([
       new Fragment(new ConfigItem(), string, 0, end),
@@ -16,10 +16,10 @@ describe("turnIntoFragments", () => {
   })
 
   it.each([
-    ["love is wise, hatred is foolish", 				"love", 			" is wise, hatred is foolish", 		4, 31],
-    ["Liebe ist weise, Hass ist töricht", 			"Liebe", 			" ist weise, Hass ist töricht", 	5, 33],
-    ["სიყვარული ბრძენია, სიძულვილი სისულელეა", 	"სიყვარული", 	" ბრძენია, სიძულვილი სისულელეა", 	9, 38],
-    ["爱是明智的，仇恨是愚蠢的", 										"爱是明智的", 	"，仇恨是愚蠢的", 										5, 12],
+    ["love is wise, hatred is foolish", "love", " is wise, hatred is foolish", 4, 31],
+    ["Liebe ist weise, Hass ist töricht", "Liebe", " ist weise, Hass ist töricht", 	5, 33],
+    ["სიყვარული ბრძენია, სიძულვილი სისულელეა", "სიყვარული", " ბრძენია, სიძულვილი სისულელეა", 9, 38],
+    ["爱是明智的，仇恨是愚蠢的", "爱是明智的", "，仇恨是愚蠢的",	5, 12],
   ])("match with string", (text, match, unmatched, delimiter, end) => {
     const config = new ConfigItem({ string: match }, {})
     expect(FragmentsUtils.turnIntoFragments(text, [config])).toStrictEqual([
@@ -29,10 +29,10 @@ describe("turnIntoFragments", () => {
   })
 
   it.each([
-    ["love is wise, hatred is foolish", 				"love", 			" is wise, hatred is foolish", 		4, 31],
-    ["Liebe ist weise, Hass ist töricht", 			"Liebe", 			" ist weise, Hass ist töricht", 	5, 33],
+    ["love is wise, hatred is foolish", "love", " is wise, hatred is foolish", 4, 31],
+    ["Liebe ist weise, Hass ist töricht", "Liebe", " ist weise, Hass ist töricht", 5, 33],
     ["სიყვარული ბრძენია, სიძულვილი სისულელეა", 	"სიყვარული", 	" ბრძენია, სიძულვილი სისულელეა", 	9, 38],
-    ["爱是明智的，仇恨是愚蠢的", 										"爱是明智的", 	"，仇恨是愚蠢的", 										5, 12],
+    ["爱是明智的，仇恨是愚蠢的", "爱是明智的", "，仇恨是愚蠢的", 5, 12],
   ])("match with regex", (text, match, unmatched, delimiter, end) => {
     const config = new ConfigItem({ regex: new RegExp(match) }, {})
     expect(FragmentsUtils.turnIntoFragments(text, [config])).toStrictEqual([
@@ -42,10 +42,10 @@ describe("turnIntoFragments", () => {
   })
 
   it.each([
-    ["love is wise, hatred is foolish", 				"love", 			[0, 4], " is wise, hatred is foolish", 		4, 31],
-    ["Liebe ist weise, Hass ist töricht", 			"Liebe", 			[0, 5], " ist weise, Hass ist töricht", 	5, 33],
+    ["love is wise, hatred is foolish","love", [0, 4], " is wise, hatred is foolish", 4, 31],
+    ["Liebe ist weise, Hass ist töricht", "Liebe", [0, 5], " ist weise, Hass ist töricht", 5, 33],
     ["სიყვარული ბრძენია, სიძულვილი სისულელეა", 	"სიყვარული", 	[0, 9], " ბრძენია, სიძულვილი სისულელეა", 	9, 38],
-    ["爱是明智的，仇恨是愚蠢的", 										"爱是明智的", 	[0, 5], "，仇恨是愚蠢的", 										5, 12],
+    ["爱是明智的，仇恨是愚蠢的", "爱是明智的", [0, 5], "，仇恨是愚蠢的", 5, 12],
   ])("match with range", (text, match, range, unmatched, delimiter, end) => {
     const config = new ConfigItem({ range: range as [number, number] }, {})
     expect(FragmentsUtils.turnIntoFragments(text, [config])).toStrictEqual([
@@ -67,12 +67,12 @@ describe("turnIntoFragments", () => {
       new ConfigItem({ range: 	[21, 24] }),
     ]
     expect(FragmentsUtils.turnIntoFragments("love is wise, hatred is foolish", config)).toStrictEqual([
-      new Fragment(config[0] as ConfigItem, 	"love",			0, 	4),
-      new Fragment(new ConfigItem(), 									" is ",			4, 	8),
-      new Fragment(config[1] as ConfigItem, 	"wise",			8, 	12),
-      new Fragment(new ConfigItem(), 									", hatred ",12, 21),
-      new Fragment(config[2] as ConfigItem, 	"is ",			21, 24),
-      new Fragment(new ConfigItem(), 									"foolish",	24, 31),
+      new Fragment(config[0] as ConfigItem, "love", 0, 4),
+      new Fragment(new ConfigItem(), " is ", 4, 8),
+      new Fragment(config[1] as ConfigItem, "wise", 8, 12),
+      new Fragment(new ConfigItem(), ", hatred ",12, 21),
+      new Fragment(config[2] as ConfigItem, "is ", 21, 24),
+      new Fragment(new ConfigItem(), "foolish", 24, 31),
     ])
   })
 
@@ -83,12 +83,12 @@ describe("turnIntoFragments", () => {
       new ConfigItem({ string: 	"love" }),
     ]
     expect(FragmentsUtils.turnIntoFragments("love is wise, hatred is foolish", config)).toStrictEqual([
-      new Fragment(config[2] as ConfigItem, 	"love",			0, 	4),
-      new Fragment(new ConfigItem(), 									" is ",			4, 	8),
-      new Fragment(config[1] as ConfigItem, 	"wise",			8, 	12),
-      new Fragment(new ConfigItem(), 									", hatred ",12, 21),
-      new Fragment(config[0] as ConfigItem, 	"is ",			21, 24),
-      new Fragment(new ConfigItem(), 									"foolish",	24, 31),
+      new Fragment(config[2] as ConfigItem, "love", 0, 4),
+      new Fragment(new ConfigItem(), " is ", 4, 8),
+      new Fragment(config[1] as ConfigItem, "wise", 8, 12),
+      new Fragment(new ConfigItem(), ", hatred ",12, 21),
+      new Fragment(config[0] as ConfigItem, "is ", 21, 24),
+      new Fragment(new ConfigItem(), "foolish", 24, 31),
     ])
   })
 
