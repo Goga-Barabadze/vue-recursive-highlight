@@ -14,7 +14,7 @@ function traverseAndCollectNodes (element: HTMLElement, config: Config) {
   const children: VNode [] = []
   element.childNodes.forEach((child: ChildNode) => {
     if (child.nodeName !== "#text") {
-      const parentTag = firstNonNull(element?.nodeName, "span") as string
+      const parentTag = firstNonNull(child.nodeName, "span") as string
 
       children.push(h(parentTag, traverseAndCollectNodes(child as HTMLElement, config)))
     } else {
