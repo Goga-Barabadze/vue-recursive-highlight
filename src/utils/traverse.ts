@@ -1,18 +1,19 @@
 import FragmentUtils from "./fragments"
 import { Fragment } from "../model/Fragment"
 import { Config } from "../model/Config"
-import { createApp, h, VNode } from "vue"
-import { firstNonNull, mergeObjects } from "./utils"
+import { createApp, h, mergeProps, VNode } from "vue"
+import { firstNonNull } from "./utils"
 import { randomHex } from "./random"
+import { ReadonlyNonNullable } from "../model/UtilityTypes"
 
-export default function updateDOM(element: HTMLElement, config: Config) {
+export default function updateDOM(element: ReadonlyNonNullable<HTMLElement>, config: ReadonlyNonNullable<Config>) {
   const tree = traverseAndCollectNodes(element, config)
   createContainer(element, tree!)
 }
 
-function traverseAndCollectNodes (element: HTMLElement, config: Config) {
-  const children: VNode [] = []
-  element.childNodes.forEach((child: ChildNode) => {
+function traverseAndCollectNodes (element: ReadonlyNonNullable<HTMLElement>, config: ReadonlyNonNullable<Config>) {
+  const children: NonNullable<VNode []> = []
+  element.childNodes.forEach((child: ReadonlyNonNullable<ChildNode>) => {
     if (child.nodeName !== "#text") {
       children.push(traverseAndCollectNodes(child as HTMLElement, config))
     } else {
@@ -20,7 +21,10 @@ function traverseAndCollectNodes (element: HTMLElement, config: Config) {
       fragments.forEach((fragment: Fragment) => {
         const modifier = fragment.config.at(0)?.modifier
         const tag = firstNonNull(modifier?.component, modifier?.tag, "span") as string | Record<string, unknown>
-        children.push(h(tag, mergeObjects(), fragment.string))
+        const props = fragment.config.map(config => config.modifier?.props)
+          .filter(prop => prop != null) as (Record<string, unknown>)[]
+
+        children.push(h(tag, mergeProps(...props), fragment.string))
       })
     }
   })
@@ -29,7 +33,7 @@ function traverseAndCollectNodes (element: HTMLElement, config: Config) {
   return h(parentTag, children)
 }
 
-function createContainer (element: HTMLElement, vNode: VNode) {
+function createContainer (element: ReadonlyNonNullable<HTMLElement>, vNode: ReadonlyNonNullable<VNode>) {
   const div = document.createElement("span")
 
   const id = "v-highlight-container-" + randomHex()

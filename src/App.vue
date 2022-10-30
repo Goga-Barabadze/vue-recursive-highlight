@@ -19,7 +19,7 @@ const config = [
 <template>
   <div v-highlight="config">
     <code>
-      <div></div>
+      <input type="button" value="hello" some-stuff @click="console.log()">
     </code>
   </div>
 </template>

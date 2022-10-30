@@ -1,10 +1,11 @@
 import { Config, ConfigItem } from "../model/Config"
 import { Fragment } from "../model/Fragment"
+import { ReadonlyNonNullable } from "../model/UtilityTypes"
 
 type MatchResult = [string, number, number]
 
 export default class FragmentsUtils {
-  static turnIntoFragments (text: string, config: Config) : Fragment [] {
+  static turnIntoFragments (text: ReadonlyNonNullable<string>, config: ReadonlyNonNullable<Config>) : Fragment [] {
     const fragments: Fragment [] = []
 
     config.forEach((configItem: ConfigItem) => {
@@ -34,7 +35,7 @@ export default class FragmentsUtils {
     return fragments.sort((a: Fragment, b: Fragment) => a.start - b.start)
   }
 
-  private static matchByRange(range: [number, number], text: string): MatchResult {
+  private static matchByRange(range: ReadonlyNonNullable<[number, number]>, text: ReadonlyNonNullable<string>): MatchResult {
     const start = range[0]
     const end 	= range[1]
 
@@ -54,7 +55,7 @@ export default class FragmentsUtils {
     ]
   }
 
-  private static * matchByRegex(regex: RegExp, text: string): Generator<MatchResult> {
+  private static * matchByRegex(regex: ReadonlyNonNullable<RegExp>, text: ReadonlyNonNullable<string>): Generator<MatchResult> {
     let match, start: number, end: number, matched: string
     while((match = regex.exec(text)) !== null && match[0]) {
       start   = match.index
@@ -69,7 +70,7 @@ export default class FragmentsUtils {
     }
   }
 
-  private static fillTheGaps (fragments: Fragment [], string: string) {
+  private static fillTheGaps (fragments: ReadonlyNonNullable<Fragment []>, string: ReadonlyNonNullable<string>) {
     if (fragments.length === 0) {
       return [ new Fragment(new ConfigItem(), string, 0, string.length) ]
     }
