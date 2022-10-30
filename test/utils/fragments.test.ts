@@ -112,7 +112,7 @@ describe("turnIntoFragments", () => {
   })
 
   it("set modifiers", () => {
-    const config = new ConfigItem({ regex: /\w+/ }, { class: "class1" })
+    const config = new ConfigItem({ regex: /\w+/ }, { props: { class: "class-1" } })
     expect(FragmentsUtils.turnIntoFragments("hello world!", [config])).toStrictEqual([
       new Fragment(config, "hello", 0, 5),
       new Fragment(new ConfigItem(), " ", 5, 6),
@@ -130,8 +130,8 @@ describe("turnIntoFragments", () => {
   describe("overlapping matches", () => {
     it.skip("fragment with multiple configs", () => {
       const config = [
-        new ConfigItem({ string: "love" }, { class: "love-class" }),
-        new ConfigItem({ regex: /\w+/ }, { class: "word-class" }),
+        new ConfigItem({ string: "love" }, { props: { class: "love-class" } }),
+        new ConfigItem({ regex: /\w+/ }, { props: { class: "word-class" } }),
       ]
       expect(FragmentsUtils.turnIntoFragments("love is wise", config)).toStrictEqual([
         new Fragment(config, "love", 0, 5),
