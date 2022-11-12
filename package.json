@@ -8,6 +8,7 @@
 	"homepage": "https://github.com/Goga-Barabadze/vue-recursive-highlight",
 	"scripts": {
 		"dev": "vite",
+		"story:dev": "histoire dev",
 		"build": "vue-tsc --noEmit && vite build",
 		"preview": "vite preview",
 		"test": "vitest",
@@ -19,6 +20,7 @@
 		"vue": "^3.2.45"
 	},
 	"devDependencies": {
+		"@histoire/plugin-vue": "^0.11.7",
 		"@typescript-eslint/eslint-plugin": "^5.42.1",
 		"@typescript-eslint/parser": "^5.42.1",
 		"@vitejs/plugin-vue": "^3.2.0",
@@ -27,6 +29,7 @@
 		"@vue/eslint-config-typescript": "^11.0.2",
 		"eslint": "^8.27.0",
 		"eslint-plugin-vue": "^9.7.0",
+		"histoire": "^0.11.7",
 		"typescript": "^4.8.4",
 		"vite": "^3.2.3",
 		"vitest": "^0.25.1",
