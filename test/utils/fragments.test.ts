@@ -1,7 +1,7 @@
-import { it, expect, describe } from "vitest"
-import FragmentsUtils from "../../src/utils/fragments"
-import { Fragment } from "../../src/model/Fragment"
+import { describe, expect, it } from "vitest"
 import { ConfigItem } from "../../src/model/Config"
+import { Fragment } from "../../src/model/Fragment"
+import FragmentsUtils from "../../src/utils/fragments"
 
 describe("turnIntoFragments", () => {
   it.each([

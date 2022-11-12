@@ -1,10 +1,10 @@
-import FragmentUtils from "./fragments"
-import { Fragment } from "../model/Fragment"
+import { VNode, createApp, h, mergeProps } from "vue"
 import { Config } from "../model/Config"
-import { createApp, h, mergeProps, VNode } from "vue"
+import { Fragment } from "../model/Fragment"
+import FragmentUtils from "./fragments"
+import { ReadonlyNonNullable } from "../model/UtilityTypes"
 import { firstNonNull } from "./utils"
 import { randomHex } from "./random"
-import { ReadonlyNonNullable } from "../model/UtilityTypes"
 
 export default function updateDOM(element: ReadonlyNonNullable<HTMLElement>, config: ReadonlyNonNullable<Config>) {
   const tree = traverseAndCollectNodes(element, config)

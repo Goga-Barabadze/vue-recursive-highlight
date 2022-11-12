@@ -31,6 +31,13 @@
 			}
 		],
 		"complexity": ["error", { "max": 10 }],
-		"no-await-in-loop": "error"
+		"no-await-in-loop": "error",
+		"sort-imports": ["error", {
+			"ignoreCase": false,
+			"ignoreDeclarationSort": false,
+			"ignoreMemberSort": false,
+			"memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+			"allowSeparatedGroups": false
+		}]
 	}
 }

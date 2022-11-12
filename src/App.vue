@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import { Directive, DirectiveBinding } from "vue"
 import { Config, ConfigItem } from "./model/Config"
+import { Directive, DirectiveBinding } from "vue"
 import updateDOM from "./utils/traverse"
 
 const vHighlight: Directive = {
