@@ -16,7 +16,7 @@ const config = [
 
 </script>
 
-<template>
+<template>Ï
   <div v-highlight="config">
     <code>
       <input type="button" value="hello" some-stuff @click="console.log()">
